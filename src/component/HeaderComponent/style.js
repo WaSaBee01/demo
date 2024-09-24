@@ -1,0 +1,31 @@
+import { Row } from "antd";
+import styled from "styled-components";
+
+export const WraperHeader = styled(Row)`
+  padding: 10px 120px;
+  background-color: #E30019;
+  align-items: center;
+`
+
+export const WraperTextHeader = styled.span`
+    font-size: 18px;
+    corlor: #fff;
+    font-weight: bold;
+    text-align: left;
+`
+
+export const WraperHeaderAccount = styled.div`
+    display: flex;
+    align-items: center;
+    color: #fff;
+    gap: 10px;
+    font-size: 13px;
+`
+
+export const WraperTextHeaderSmall = styled.span`
+    font-size: 12px;
+    corlor: #fff;
+
+`
+
+
