@@ -1,7 +1,7 @@
 import React from 'react'
 import { Input } from 'antd'
 
-const Inputcomponent = (size, placeholder, bordered, style, ...rest) => {
+const Inputcomponent = ({size, placeholder, bordered, style, ...rest}) => {
     return (
         <Input
             size={size}
