@@ -7,8 +7,15 @@ import {
     CaretDownOutlined,
     ShoppingCartOutlined,
 } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const HeaderComponent = () => {
+    const navigate = useNavigate()
+    const user = useSelector((state) => state.user)
+    const handleNavigateLogin = () => {
+        navigate('/sign-in')
+    }
     return (
         <div>
             <WraperHeader >
@@ -27,14 +34,18 @@ const HeaderComponent = () => {
                 <Col span={6} style={{display: 'flex', gap: '20px', alignItems: 'center'}}>
                     <WraperHeaderAccount>
                         <UserOutlined style={{ fontSize: '30px', color: '#fff' }} />
-                        <div>
+                        {user?.name ? (
+                            <div style={{cursor: 'pointer'}}>{user.name}</div>
+                        ): (
+                            <div onClick={handleNavigateLogin} style={{cursor: 'pointer'}}>
                             <WraperTextHeaderSmall>Đăng nhập/Đăng kí</WraperTextHeaderSmall>
                             <div>
                                 <WraperTextHeaderSmall>Tài Khoản</WraperTextHeaderSmall>
                                 <CaretDownOutlined />
                             </div>
-
                         </div>
+                        )}
+                        
                     </WraperHeaderAccount>
                     
                         <div>

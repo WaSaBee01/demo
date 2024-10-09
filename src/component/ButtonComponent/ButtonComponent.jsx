@@ -2,15 +2,18 @@ import React from 'react'
 import { Button } from 'antd'
 
 
-const ButtonComponent = ({size, styleButton, styleTextButton, textButton, ...rests}) => {
+const ButtonComponent = ({ size, styleButton, styleTextButton, textButton, disabled, ...rests }) => {
     return (
         <Button
+            style={{
+                ...styleButton,
+                background: disabled ? '#ccc' : styleButton.background
+            }}
             size={size}
-            style={styleButton}
             {...rests}
         // icon={<SearchOutlined style={{color: colorButton }} />}
         >
-            <span style={styleTextButton}>{textButton}</span>   
+            <span style={styleTextButton}>{textButton}</span>
         </Button>
     )
 }
