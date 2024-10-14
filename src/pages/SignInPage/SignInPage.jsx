@@ -19,7 +19,7 @@ const SignInPage = () => {
   const [isShowPassword, setIsShowPassword] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-const dispath = useDispatch()
+  const dispatch = useDispatch()
 
 
   const navigate = useNavigate()
@@ -28,24 +28,24 @@ const dispath = useDispatch()
     data => UserService.loginUser(data)
   )
 
-  const { data, isPending, isSuccess } = mutation
+  const { data, isLoading, isSuccess } = mutation
 
   useEffect(() => {
     if (isSuccess) {
       navigate('/')
       localStorage.setItem('access_token', JSON.stringify(data?.access_token)) // save token to local storage
-      if(data?.access_token){
+      if (data?.access_token) {
         const decoded = jwtDecode(data?.access_token)
-        if(decoded?.id){
+        if (decoded?.id) {
           handleGetDetailUser(decoded?.id, data?.access_token)
         }
       }
     }
   }, [isSuccess])
 
-  const handleGetDetailUser = async (id, token) => { 
+  const handleGetDetailUser = async (id, token) => {
     const res = await UserService.getDetailUser(id, token)
-    dispath(updateUser({...res?.data, access_token: token}))
+    dispatch(updateUser({ ...res?.data, access_token: token }))
   }
 
   console.log('mutation', mutation)
@@ -103,7 +103,7 @@ const dispath = useDispatch()
 
           {data?.status === 'ERR' && <span style={{ color: 'red' }}>{data?.message} </span>}
 
-          <Loading isPending={mutation.isPending}>
+          <Loading isLoading={isLoading}>
             <ButtonComponent
               disabled={email === '' || password === ''}
               onClick={handleSignin}

@@ -2,7 +2,9 @@ import React from 'react'
 import { StarFilled } from '@ant-design/icons';
 import { StyleProductName, WrapperDiscount, WrapperPrice, WrapperReportText, WrapperCard, WrapperStyleTextSell } from './style';
 
-const CardComponent = () => {
+const CardComponent = (props) => {
+    const {countInStock, description,image, name, price, rating, type, discount, selled }=props
+   
     return (
         <WrapperCard
             hoverable
@@ -12,18 +14,18 @@ const CardComponent = () => {
             cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
         >
 
-            <StyleProductName>Iphone 16</StyleProductName>
+            <StyleProductName>{name}</StyleProductName>
             <WrapperReportText>
                 <span style={{marginRight: '4px'}}>
-                    <span>4.5</span><StarFilled style={{ fontSize: '13px', color: 'yellow' }} />
+                    <span>{rating}</span><StarFilled style={{ fontSize: '13px', color: 'yellow' }} />
                 </span>
-                <WrapperStyleTextSell> |  Đã bán 9999999999+</WrapperStyleTextSell>
+                <WrapperStyleTextSell> |  Đã bán {selled || 99999999} +</WrapperStyleTextSell>
 
             </WrapperReportText>
             <WrapperPrice>
-                <span style={{marginRight: '8px'}}>9.999.999.999đ</span>
+                <span style={{marginRight: '8px'}}>{price}</span>
                 <WrapperDiscount>
-                    -0%
+                    {discount || 5} %
                 </WrapperDiscount>
             </WrapperPrice>
 

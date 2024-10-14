@@ -26,7 +26,7 @@ export const WrapperStyleTextSell = styled.span`
 `
 
 export const WrapperPriceProduct = styled.div`
-    background: rgb(250,250,250):
+    background: rgb(250,250,250);
     border-radius: 4px;
 `
 export const WrapperPriceTextProduct = styled.h1`
