@@ -1,71 +1,73 @@
-import { Divider, Radio, Table } from 'antd';
-import React from 'react'
+import { Table } from 'antd';
+import React, { useMemo, useState } from 'react'
+import Loading from '../LoadingComponent/Loading';
+import { Excel } from 'antd-table-saveas-excel';
 
 const TableComponent = (props) => {
-    const { selectionType = ' checkbox' } = props
+    const { selectionType = 'checkbox', data: dataSource = [], isLoading = false, columns = [], handleDeleteMany } = props
+    const [rowSelectedKeys, setRowSelectedKeys] = useState([])
 
-    const columns = [
-        {
-            title: 'Name',
-            dataIndex: 'name',
-            render: (text) => <a>{text}</a>,
-        },
-        {
-            title: 'Age',
-            dataIndex: 'age',
-        },
-        {
-            title: 'Address',
-            dataIndex: 'address',
-        },
-    ];
-    const data = [
-        {
-            key: '1',
-            name: 'John Brown',
-            age: 32,
-            address: 'New York No. 1 Lake Park',
-        },
-        {
-            key: '2',
-            name: 'Jim Green',
-            age: 42,
-            address: 'London No. 1 Lake Park',
-        },
-        {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sydney No. 1 Lake Park',
-        },
-        {
-            key: '4',
-            name: 'Disabled User',
-            age: 99,
-            address: 'Sydney No. 1 Lake Park',
-        },
-    ];
+    const newColumnsExport = useMemo(() => {
+        const arr = columns?.filter((col) => col.dataIndex !== 'action')
+        return arr
+    }, [columns])
 
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+            setRowSelectedKeys(selectedRowKeys)
         },
-        getCheckboxProps: (record) => ({
-            disabled: record.name === 'Disabled User',
-            // Column configuration not to be checked
-            name: record.name,
-        }),
+        // getCheckboxProps: (record) => ({
+        //     disabled: record.name === 'Disabled User',
+        //     // Column configuration not to be checked
+        //     name: record.name,
+        // }),
     };
 
+    const handleDeleteAll = () => {
+        if (handleDeleteMany) {
+            handleDeleteMany(rowSelectedKeys);
+        }
+    };
+
+    const handleClick = () => {
+        const excel = new Excel();
+        excel
+            .addSheet("test")
+            .addColumns(newColumnsExport)
+            .addDataSource(dataSource, {
+                str2Percent: true
+            })
+            .saveAs("Excel.xlsx");
+    };
+
+
     return (
-        <Table
-            rowSelection={{
-                type: selectionType,
-                ...rowSelection,
-            }}
-            columns={columns}
-            dataSource={data}
-        />
+        <Loading isLoading={isLoading}>
+            {rowSelectedKeys.length > 0 && (
+                <div style={{
+                    background: '#E30019',
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    padding: '10px',
+                    cursor: 'pointer',
+                    fontSize: '16px',
+                }}
+                    onClick={handleDeleteAll}>
+                    Xóa tất cả
+                </div>
+            )}
+            <button onClick={handleClick}>Export</button>
+            <Table
+                rowSelection={{
+                    type: selectionType,
+                    ...rowSelection,
+                }}
+                columns={columns}
+                dataSource={dataSource}
+                {...props}
+            />
+        </Loading>
+
     )
 }
 

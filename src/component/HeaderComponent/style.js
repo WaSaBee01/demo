@@ -12,7 +12,7 @@ export const WraperHeader = styled(Row)`
 
 export const WraperTextHeader = styled.span`
     font-size: 18px;
-    corlor: #fff;
+    color: #fff;
     font-weight: bold;
     text-align: left;
 `
@@ -27,7 +27,7 @@ export const WraperHeaderAccount = styled.div`
 
 export const WraperTextHeaderSmall = styled.span`
     font-size: 12px;
-    corlor: #fff;
+    color: #fff;
     white-space: nowrap;
 `
 

@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as UserService from '../../services/UserService'
 import { resetUser } from '../../redux/slides/userSlide'
+import { searchProduct } from '../../redux/slides/productSlide';
 
 const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
     const navigate = useNavigate()
@@ -18,6 +19,8 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
     const dispatch = useDispatch()
     const [userName, setUserName] = useState('')
     const [userAvatar, setUserAvatar] = useState('')
+    const [search, setSearch] = useState('')
+    const order = useSelector((state) => state.order)
     const handleNavigateLogin = () => {
         navigate('/sign-in')
     }
@@ -43,11 +46,17 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
         </div>
     );
 
+    const onSearch = (e) => {
+        setSearch(e.target.value)
+        dispatch(searchProduct(e.target.value))
+    }
+
     return (
-        <div>
+        // style={{ width: '100%', background: '#E30019', display: 'flex', justifyContent: 'center' }}
+        <div >
             <WraperHeader style={{ justifyContent: isHiddenSearch && isHiddenCart ? 'space-between' : 'unset' }}>
                 <Col span={6}>
-                    <WraperTextHeader> TechShop </WraperTextHeader>
+                    <WraperTextHeader onClick={() => navigate('/')} style={{ cursor: 'pointer' }}> TechShop </WraperTextHeader>
                 </Col>
 
                 {!isHiddenSearch && (
@@ -56,12 +65,13 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                             size="large"
                             // bordered={false}
                             textButton="Tìm kiếm"
-                            placeholder="input search text" style={{ width: 200 }}
+                            placeholder="input search text"
+                            onChange={onSearch}
                         />
                     </Col>
                 )}
 
-                <Col span={6} style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+                <Col span={6} style={{ display: 'flex', gap: '54px', alignItems: 'center' }}>
                     <WraperHeaderAccount>
                         {userAvatar ? (
                             <img src={userAvatar} alt="avatar" style={{
@@ -93,8 +103,8 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                         )}
                     </WraperHeaderAccount>
                     {!isHiddenCart && (
-                        <div>
-                            <Badge count={9} size='small'>
+                        <div onClick={() => navigate('/order')} style={{ cursor: 'pointer' }}>
+                            <Badge count={order?.orderItems?.length} size='small'>
                                 <ShoppingCartOutlined style={{ fontSize: '30px', color: '#fff' }} />
                             </Badge>
                             <WraperTextHeaderSmall>Giỏ hàng</WraperTextHeaderSmall>

@@ -19,14 +19,15 @@ const ButtonInput = (props) => {
         placeholder={placeholder}
         bordered={bordered}
         style={{ backgroundColor: backgroundColorInput }}
+        {...props}
       />
       <ButtonComponent
         size={size}
-        styleButton={{ backgroundColor: backgroundColorButton, border: !bordered && 'none' }}
+        styleButton={{ background: backgroundColorButton, border: !bordered && 'none' }}
         icon={<SearchOutlined color={colorButton} style={{ color: '#fff' }} />}
         textButton={textButton}
-        styleTextButton ={ { color: colorButton } }
-      /> 
+        styleTextButton={{ color: colorButton }}
+      />
     </div>
   )
 }

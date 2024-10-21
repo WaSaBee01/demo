@@ -5,7 +5,7 @@ import ButtonComponent from '../../component/ButtonComponent/ButtonComponent'
 import logo from '../../assets/images/logologin.png'
 import { Image } from 'antd'
 import { EyeFilled, EyeInvisibleFilled } from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import * as UserService from '../../services/UserService'
 import { useMutationHook } from '../../hooks/useMutationHook'
 import Loading from '../../component/LoadingComponent/Loading'
@@ -17,6 +17,7 @@ const SignInPage = () => {
 
 
   const [isShowPassword, setIsShowPassword] = useState(false)
+  const location = useLocation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
@@ -32,7 +33,11 @@ const SignInPage = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate('/')
+      if (location?.state) {
+        navigate(location?.state)
+      } else {
+        navigate('/')
+      }
       localStorage.setItem('access_token', JSON.stringify(data?.access_token)) // save token to local storage
       if (data?.access_token) {
         const decoded = jwtDecode(data?.access_token)

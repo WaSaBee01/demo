@@ -33,7 +33,7 @@ export const routes = [
     },
 
     {
-        path: '/:type',
+        path: '/product/:type',
         page: TypeProductPage,
         isShowHeader: true
     },
@@ -51,7 +51,7 @@ export const routes = [
     },
 
     {
-        path: '/product-detail',
+        path: '/product-detail/:id',
         page: ProductDetailPage,
         isShowHeader: true
     },
@@ -73,5 +73,5 @@ export const routes = [
         path: '*',
         page: NotFoundPage
     },
-    
+
 ]
