@@ -34,7 +34,8 @@ const AdminProduct = () => {
         image: '',
         type: '',
         countInStock: '',
-        newType: ''
+        newType: '',
+        discount: '',
     })
 
     const [stateProductDetail, setStateProductDetail] = useState({
@@ -45,6 +46,8 @@ const AdminProduct = () => {
         image: '',
         type: '',
         countInStock: '',
+        discount: '',
+
     })
 
     const [form] = Form.useForm()
@@ -57,7 +60,8 @@ const AdminProduct = () => {
                 rating,
                 image,
                 type,
-                countInStock
+                countInStock,
+                discount
             } = data
 
             const res = ProductService.createProduct(
@@ -68,7 +72,8 @@ const AdminProduct = () => {
                     rating,
                     image,
                     type,
-                    countInStock
+                    countInStock,
+                    discount
                 }
             )
             return res
@@ -133,6 +138,7 @@ const AdminProduct = () => {
                 image: res?.data?.image,
                 type: res?.data?.type,
                 countInStock: res?.data?.countInStock,
+                discount: res?.data?.discount,
             })
         }
         setIsLoadingUpdate(false)
@@ -374,6 +380,7 @@ const AdminProduct = () => {
             image: '',
             type: '',
             countInStock: '',
+            discount: '',
         })
         form.resetFields()
     };
@@ -405,6 +412,7 @@ const AdminProduct = () => {
             image: stateProduct.image,
             type: stateProduct.type === 'addType' ? stateProduct.newType : stateProduct.type,
             countInStock: stateProduct.countInStock,
+            discount: stateProduct.discount
         }
         mutation.mutate(params, {
             onSettled: () => {
@@ -525,8 +533,6 @@ const AdminProduct = () => {
                         >
                             <Select
                                 name="type"
-                                // defaultValue="lucy"
-                                // style={{ width: 120 }}
                                 value={stateProduct.type}
                                 onChange={handleChangeSelect}
                                 options={renderOptions(typeProducts?.data?.data)}
@@ -572,6 +578,14 @@ const AdminProduct = () => {
                             rules={[{ required: true, message: 'Please input product rating!' }]}
                         >
                             <Inputcomponent value={stateProduct.rating} onChange={handleOnchange} name="rating" />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Discount"
+                            name="discount"
+                            rules={[{ required: true, message: 'Please input product discount!' }]}
+                        >
+                            <Inputcomponent value={stateProduct.discount} onChange={handleOnchange} name="discount" />
                         </Form.Item>
 
                         <Form.Item
@@ -658,6 +672,14 @@ const AdminProduct = () => {
                             rules={[{ required: true, message: 'Please input product rating!' }]}
                         >
                             <Inputcomponent value={stateProductDetail.rating} onChange={handleOnchangeDetail} name="rating" />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Discount"
+                            name="discount"
+                            rules={[{ required: true, message: 'Please input product discount!' }]}
+                        >
+                            <Inputcomponent value={stateProductDetail.discount} onChange={handleOnchangeDetail} name="discount" />
                         </Form.Item>
 
                         <Form.Item

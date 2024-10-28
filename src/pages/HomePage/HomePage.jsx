@@ -15,7 +15,7 @@ import { useDebounce } from '../../hooks/useDebounce'
 const HomePage = () => {
   const searchProduct = useSelector((state) => state?.product?.search)
   const [loading, setLoading] = useState(false)
-  const [limit, setLimit] = useState(6)
+  const [limit, setLimit] = useState(5)
   const searchDebounce = useDebounce(searchProduct, 500)
   const [typeProducts, setTypeProducts] = useState([])
 
@@ -56,7 +56,7 @@ const HomePage = () => {
 
       </div>
       <div className='body' style={{ width: '100%', backgroundColor: '#f8f8fc' }}>
-        <div id="container" style={{ height: '1200px', width: '1270px', margin: '0 auto' }}>
+        <div id="container" style={{ height: '1500px', width: '1270px', margin: '0 auto' }}>
           <SliderComponent arrImages={[slider1, slider2, slider3]} />
           <WrapperProducts>
             {products?.data?.map((product) => {

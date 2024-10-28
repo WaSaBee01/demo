@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     orderItems: [],
-
+    orderItemsSelected: [],
     shippingAdress: {
     },
 
@@ -26,7 +26,7 @@ export const orderSlide = createSlice({
             const { orderItem } = action.payload
             console.log('orderItem', orderItem)
             console.log('state', state)
-            const itemOrder = state.orderItems.find((item) => item.product === orderItem.product)
+            const itemOrder = state?.orderItems?.find((item) => item?.product === orderItem?.product)
             if (itemOrder) {
                 itemOrder.amount += orderItem?.amount
             } else {
@@ -34,29 +34,55 @@ export const orderSlide = createSlice({
             }
 
         },
-
-
         increaseAmount: (state, action) => {
             const { idProduct } = action.payload
             const itemOrder = state?.orderItems?.find((item) => item?.product === idProduct)
-            itemOrder.amount++
+            const itemOrderSelected = state?.orderItemsSelected?.find((item) => item?.product === idProduct)
+            itemOrder.amount++;
+            if (itemOrderSelected) {
+                itemOrderSelected.amount++;
+            }
+
         },
 
         decreaseAmount: (state, action) => {
             const { idProduct } = action.payload
             const itemOrder = state?.orderItems?.find((item) => item?.product === idProduct)
-            itemOrder.amount--
+            const itemOrderSelected = state?.orderItemsSelected?.find((item) => item?.product === idProduct)
+            itemOrder.amount--;
+            if (itemOrderSelected) {
+                itemOrderSelected.amount--;
+            }
         },
 
-        // removeFromCart: (state, action) => {
-        //     const { idProduct } = action.payload
-        //     const itemOrder = state?.orderItems?.find((item) => item?.product !== idProduct)
-        //     itemOrder.orderItems = itemOrder
-        // },
+        removeFromCart: (state, action) => {
+            const { idProduct } = action.payload
+            const itemOrder = state?.orderItems?.filter((item) => item?.product !== idProduct)
+            const itemOrderSelected = state?.orderItemsSelected?.filter((item) => item?.product !== idProduct)
+            state.orderItems = itemOrder;
+            state.orderItemsSelected = itemOrderSelected
+        },
+        removeAllFromCart: (state, action) => {
+            const { listChecked } = action.payload
+            const itemOrders = state?.orderItems?.filter((item) => !listChecked.includes(item.product))
+            const itemOrdersSelected = state?.orderItemsSelected?.filter((item) => !listChecked.includes(item.product))
+            state.orderItems = itemOrders;
+            state.orderItemsSelected = itemOrdersSelected
+        },
+        selectedOrder: (state, action) => {
+            const orderSelected = []
+            const { listChecked } = action.payload
+            state.orderItems.forEach((order) => {
+                if (listChecked.includes(order.product)) {
+                    orderSelected.push(order)
+                }
+            })
+            state.orderItemsSelected = orderSelected
+        }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { addToCart, removeFromCart, increaseAmount, decreaseAmount } = orderSlide.actions
+export const { addToCart, removeFromCart, increaseAmount, decreaseAmount, removeAllFromCart, selectedOrder } = orderSlide.actions
 
 export default orderSlide.reducer

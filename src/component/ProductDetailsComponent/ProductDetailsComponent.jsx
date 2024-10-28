@@ -10,6 +10,7 @@ import Loading from '../LoadingComponent/Loading'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { addToCart } from '../../redux/slides/orderSlide'
+import { convertPrice } from '../../utils'
 
 
 
@@ -43,7 +44,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
             navigate('/sign-in', { state: location?.pathname })
         } else {
             dispatch(addToCart({
-                orderItems: {
+                orderItem: {
                     name: productDetail.name,
                     amount: numProduct,
                     image: productDetail.image,
@@ -93,7 +94,7 @@ const ProductDetailsComponent = ({ idProduct }) => {
                         <WrapperStyleTextSell> | Đã bán 9090909099+</WrapperStyleTextSell>
                     </div>
                     <WrapperPriceProduct>
-                        <WrapperPriceTextProduct>{productDetail?.price?.toLocaleString()}</WrapperPriceTextProduct>
+                        <WrapperPriceTextProduct>{convertPrice(productDetail?.price)}</WrapperPriceTextProduct>
                     </WrapperPriceProduct>
 
                     <WrapperAdressProduct>

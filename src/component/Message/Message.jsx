@@ -1,15 +1,15 @@
 import { message } from "antd";
 
 const success = (mes = 'Success') => {
-    message.success('Success');
-  };
-  
-  const error = (mes = 'Error') => {
-    message.error('Error');
-  };
-  
-  const warning = (mes ='Warning') => {
-    message.warning('This is a warning message');
-  };
+  message.success(mes);
+};
 
-  export {success, error, warning}
+const error = (mes = 'Error') => {
+  message.error(mes);
+};
+
+const warning = (mes = 'Warning') => {
+  message.warning(mes);
+};
+
+export { success, error, warning }

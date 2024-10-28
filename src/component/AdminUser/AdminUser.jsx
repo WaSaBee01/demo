@@ -80,7 +80,7 @@ const AdminUser = () => {
   )
 
   const getAllUsers = async () => {
-    const res = await UserService.getAllUser()
+    const res = await UserService.getAllUser(user?.access_token)
     return res
   }
 
@@ -119,8 +119,8 @@ const AdminUser = () => {
   const { data: dataDeleted, isLoading: isLoadingDeleted, isSuccess: isSuccessDeleted, isError: isErrorDeleted } = mutationDeleted
   const { data: dataDeletedMany, isLoading: isLoadingDeletedMany, isSuccess: isSuccessDeletedMany, isError: isErrorDeletedMany } = mutationDeletedMany
 
-
-  const queryUser = useQuery({ queryKey: ['user'], queryFn: getAllUsers })
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  const queryUser = useQuery({ queryKey: ['users'], queryFn: getAllUsers })
   const { isLoading: isLoadingUsers, data: users } = queryUser
   const renderAction = () => {
     return (

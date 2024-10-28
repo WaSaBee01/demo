@@ -24,13 +24,13 @@ const SignUpPage = () => {
     data => UserService.signupUser(data)
   )
 
-  const { data,isLoading, isSuccess, isError } = mutation
+  const { data, isLoading, isSuccess, isError } = mutation
 
   useEffect(() => {
-    if(isSuccess) {
+    if (isSuccess) {
       message.success()
       handelNavigateSignIn()
-    }else if(isError) {
+    } else if (isError) {
       message.error()
     }
   }, [isSuccess, isError])
@@ -78,13 +78,14 @@ const SignUpPage = () => {
                 top: '4px',
                 right: '8px'
               }}
-            >{
+            >
+              {/* {
                 isShowPassword ? (
                   < EyeFilled />
                 ) : (
                   <EyeInvisibleFilled />
                 )
-              }
+              } */}
             </span>
 
             <InputForm style={{ marginBottom: '10px' }}
@@ -106,13 +107,14 @@ const SignUpPage = () => {
                 top: '4px',
                 right: '8px'
               }}
-            >{
+            >
+              {/* {
                 isShowConfirmPassword ? (
                   < EyeFilled />
                 ) : (
                   <EyeInvisibleFilled />
                 )
-              }
+              } */}
             </span>
             <InputForm placeholder="confirm password"
               type={isShowConfirmPassword ? "text" : "password"}
