@@ -237,11 +237,11 @@ const AdminUser = () => {
       dataIndex: 'isAdmin',
       filters: [
         {
-          text: 'True',
+          text: 'TRUE',
           value: true,
         },
         {
-          text: 'False',
+          text: 'FALSE',
           value: false,
         },
       ],

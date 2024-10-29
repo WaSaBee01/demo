@@ -45,11 +45,13 @@ const ProductDetailsComponent = ({ idProduct }) => {
         } else {
             dispatch(addToCart({
                 orderItem: {
-                    name: productDetail.name,
+                    name: productDetail?.name,
                     amount: numProduct,
-                    image: productDetail.image,
-                    price: productDetail.price,
-                    product: productDetail._id
+                    image: productDetail?.image,
+                    price: productDetail?.price,
+                    product: productDetail?._id,
+                    discount: productDetail?.discount,
+                    countInStock: productDetail?.countInStock
                 }
             }))
         }

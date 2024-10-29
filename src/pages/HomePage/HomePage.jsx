@@ -44,7 +44,7 @@ const HomePage = () => {
 
   return (
     <Loading isLoading={isLoading || loading}>
-      <div style={{ width: '1270', margin: '0 auto' }}>
+      <div style={{ width: '1270px', margin: '0 auto' }}>
         <WrapperTypeProduct>
           {typeProducts.map((item) => {
             return (

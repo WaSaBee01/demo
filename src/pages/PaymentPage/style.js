@@ -23,6 +23,9 @@ export const WrapperRadio = styled.div`
     margin-top: 20px;
     padding: 10px;
     padding-bottom: 20px;
+    display: 'flex',
+     flexDirection: 'column',
+      gap: '10px'
 `
 
 export const WrapperRight = styled.div`

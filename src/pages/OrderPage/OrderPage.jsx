@@ -97,7 +97,8 @@ const OrderPage = () => {
 
   const priceDiscountMemo = useMemo(() => {
     const result = order?.orderItemsSelected?.reduce((total, cur) => {
-      return total + ((cur?.discount * cur?.amount))
+      const totalDiscount = cur.discount ? cur.discount : 0
+      return total + (priceMemo * (totalDiscount * cur?.amount) / 100)
     }, 0)
     if (Number(result)) {
       return result
@@ -243,7 +244,7 @@ const OrderPage = () => {
                           <MinusOutlined style={{ color: '#000', fontSize: '10px' }} />
                         </button>
 
-                        <WrapperInputNumber defaultValue={order?.amount} >{order?.amount}</WrapperInputNumber>
+                        <WrapperInputNumber defaultValue={order?.amount} >{order?.amount} </WrapperInputNumber>
 
                         <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase', order?.product)}>
                           <PlusOutlined style={{ color: '#000', fontSize: '10px' }} />
@@ -273,7 +274,7 @@ const OrderPage = () => {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <span>Giảm giá</span>
-                  <span style={{ color: "#000", fontSize: '14px', fontWeight: 'bold' }}>{`${priceDiscountMemo} %`}</span>
+                  <span style={{ color: "#000", fontSize: '14px', fontWeight: 'bold' }}>{convertPrice(priceDiscountMemo)}</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <span>Phí giao hàng</span>

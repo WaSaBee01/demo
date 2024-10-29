@@ -55,7 +55,12 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
         } else if (type === 'admin') {
             navigate('/system/admin')
         } else if (type === 'my-order') {
-            navigate('/my-order')
+            navigate('/my-order', {
+                state: {
+                    id: user?.id,
+                    token: user?.access_token
+                }
+            })
         } else {
             handleLogout()
         }
@@ -81,7 +86,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                             size="large"
                             // bordered={false}
                             textButton="Tìm kiếm"
-                            placeholder="input search text"
+                            placeholder="Tìm kiếm sản phẩm"
                             onChange={onSearch}
                         />
                     </Col>
