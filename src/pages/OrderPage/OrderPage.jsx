@@ -41,11 +41,16 @@ const OrderPage = () => {
       setListChecked([...listChecked, e.target.value])
     }
   }
-  const handleChangeCount = (type, idProduct) => {
+  const handleChangeCount = (type, idProduct, limit) => {
     if (type === 'increase') {
-      dispatch(increaseAmount({ idProduct }))
+      if (!limit) {
+        dispatch(increaseAmount({ idProduct }))
+      }
     } else {
-      dispatch(decreaseAmount({ idProduct }))
+      if (!limit) {
+        dispatch(decreaseAmount({ idProduct }))
+      }
+
     }
 
   }
@@ -223,7 +228,7 @@ const OrderPage = () => {
             <WrapperListOrder>
               {order?.orderItems?.map((order) => {
                 return (
-                  <WrapperItemOrder>
+                  <WrapperItemOrder key={order?.product}>
                     <div style={{ width: '390px', display: 'flex', alignItems: 'center', gap: 4 }}>
                       <Checkbox onChange={onChange} value={order?.product} checked={listChecked.includes(order?.product)}></Checkbox>
                       <img src={order?.image} style={{ width: '77px', height: '79px', objectFit: 'cover' }} alt='img' />
@@ -240,13 +245,13 @@ const OrderPage = () => {
                         <WrapperPriceDiscount>0d</WrapperPriceDiscount>
                       </span>
                       <WrapperCountOrder>
-                        <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease', order?.product)}>
+                        <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease', order?.product, order?.amount === 1)}>
                           <MinusOutlined style={{ color: '#000', fontSize: '10px' }} />
                         </button>
 
                         <WrapperInputNumber defaultValue={order?.amount} >{order?.amount} </WrapperInputNumber>
 
-                        <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase', order?.product)}>
+                        <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('increase', order?.product, order?.amount === order?.countInStock)}>
                           <PlusOutlined style={{ color: '#000', fontSize: '10px' }} />
                         </button>
                       </WrapperCountOrder>
@@ -295,11 +300,11 @@ const OrderPage = () => {
               styleButton={{
                 background: 'rgb(255, 57, 69)',
                 height: '48px',
-                width: '220px',
+                width: '300px',
                 borderRadius: '4px',
                 border: 'none'
               }}
-              textButton={'Thanh toán'}
+              textbutton={'Thanh toán'}
               styleTextButton={{ color: '#fff', fontSize: '16px', fontWeight: 500 }}
             ></ButtonComponent>
           </WrapperRight>

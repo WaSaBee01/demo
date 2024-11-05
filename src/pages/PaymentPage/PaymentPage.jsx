@@ -100,7 +100,8 @@ const PaymentPage = () => {
                     itemsPrice: priceMemo,
                     shippingPrice: deliveryMemo,
                     totalPrice: totalPriceMemo,
-                    user: user?.id
+                    user: user?.id,
+                    email: user?.email
                 }
             )
         }
@@ -211,7 +212,8 @@ const PaymentPage = () => {
                 totalPrice: totalPriceMemo,
                 user: user?.id,
                 isPaid: true,
-                paidAt: details.update_time
+                paidAt: details.update_time,
+                email: user?.email
             }
         )
     }
@@ -319,7 +321,7 @@ const PaymentPage = () => {
                             {payment === 'paypal' && sdkReady ? (
                                 <div style={{ width: '320px' }}>
                                     <PayPalButton
-                                        amount={totalPriceMemo / 20000}
+                                        amount={Math.round(totalPriceMemo / 25000)}
                                         // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
                                         onSuccess={onSuccessPaypal}
                                         onError={() => {
@@ -339,7 +341,7 @@ const PaymentPage = () => {
                                         borderRadius: '4px',
                                         border: 'none'
                                     }}
-                                    textButton={'Thanh toán'}
+                                    textbutton={'Thanh toán'}
                                     styleTextButton={{ color: '#fff', fontSize: '16px', fontWeight: 500 }}
                                 ></ButtonComponent>
                             )}

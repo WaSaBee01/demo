@@ -46,7 +46,7 @@ const OrderDetailPage = () => {
         <Loading isLoading={isLoading}>
             <Container>
                 <div style={{ width: '1270px', margin: '0 auto' }}>
-                    <h2>Chi tiết đơn hàng</h2>
+                    <h2 style={{ fontSize: '24px', marginBottom: '20px' }}>Chi tiết đơn hàng</h2>
                     <WrapperHeaderUser>
                         <WrapperInfoUser>
                             <WrapperLabel>Địa chỉ người nhận</WrapperLabel>
@@ -72,54 +72,52 @@ const OrderDetailPage = () => {
                         </WrapperInfoUser>
                     </WrapperHeaderUser>
                     <WrapperStyleContent>
-                        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <div style={{ width: '610px' }}>Sản phẩm</div>
+                        <div style={{ display: 'grid', gridTemplateColumns: '4fr 1fr 1fr 1fr', padding: '10px 0', fontWeight: 'bold', borderBottom: '1px solid #ddd' }}>
+                            <WrapperItemBabel>Sản phẩm</WrapperItemBabel>
                             <WrapperItemBabel>Giá</WrapperItemBabel>
                             <WrapperItemBabel>Số lượng</WrapperItemBabel>
                             <WrapperItemBabel>Giảm giá</WrapperItemBabel>
                         </div>
-                        {data?.orderItems?.map((order) => {
-                            return (
-                                <WrapperProduct>
-                                    <WrapperNameProduct>
-                                        <img src={order?.image}
-                                            alt="Product"
-                                            style={{
-                                                width: '70px',
-                                                height: '70px',
-                                                objectFit: 'cover',
-                                                border: '1px solid #f5f5f5',
-                                                padding: '2px'
-                                            }} />
-                                        <div style={{
-                                            width: 260,
-                                            overflow: 'hidden',
-                                            textOverflow: 'ellipsis',
-                                            whiteSpace: 'nowrap',
-                                            marginLeft: '10px',
-                                            fontSize: '14px',
-                                            height: '70px'
-                                        }}>
-                                            Điện thoại
-                                        </div>
-                                    </WrapperNameProduct>
-                                    <WrapperItem>{convertPrice(order?.price)}</WrapperItem>
-                                    <WrapperItem>{order?.amount}</WrapperItem>
-                                    <WrapperItem>{order?.discount ? convertPrice(priceMemo * order?.discount / 100) : '0 VND'}</WrapperItem>
-                                </WrapperProduct>
-                            )
-                        })}
+                        {data?.orderItems?.map((order, index) => (
+                            <WrapperProduct key={index} style={{ gridTemplateColumns: '4fr 1fr 1fr 1fr' }}>
+                                <WrapperNameProduct>
+                                    <img
+                                        src={order?.image || '/default-product.png'}
+                                        alt="Product"
+                                        style={{
+                                            width: '70px',
+                                            height: '70px',
+                                            objectFit: 'cover',
+                                            marginRight: '10px',
+                                            border: '1px solid #f5f5f5'
+                                        }}
+                                    />
+                                    <div style={{
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        whiteSpace: 'nowrap',
+                                        fontSize: '14px'
+                                    }}>
+                                        {order?.name || 'Điện thoại'}
+                                    </div>
+                                </WrapperNameProduct>
+
+                                <WrapperItem>{convertPrice(order?.price || 0)}</WrapperItem>
+                                <WrapperItem>{order?.amount || 1}</WrapperItem>
+                                <WrapperItem>{order?.discount ? convertPrice(priceMemo * (order?.discount / 100)) : '0 VND'}</WrapperItem>
+                            </WrapperProduct>
+                        ))}
                         <WrapperPrice>
                             <WrapperItemBabel>Tạm tính</WrapperItemBabel>
                             <WrapperItem>{convertPrice(priceMemo)}</WrapperItem>
                         </WrapperPrice>
                         <WrapperPrice>
                             <WrapperItemBabel>Phí vận chuyển</WrapperItemBabel>
-                            <WrapperItem>{convertPrice(data?.shippingPrice)}</WrapperItem>
+                            <WrapperItem>{convertPrice(data?.shippingPrice || 0)}</WrapperItem>
                         </WrapperPrice>
                         <WrapperPrice>
                             <WrapperItemBabel>Tổng cộng</WrapperItemBabel>
-                            <WrapperItem>{convertPrice(data?.totalPrice)}</WrapperItem>
+                            <WrapperItem>{convertPrice(data?.totalPrice || 0)}</WrapperItem>
                         </WrapperPrice>
                     </WrapperStyleContent>
                 </div>

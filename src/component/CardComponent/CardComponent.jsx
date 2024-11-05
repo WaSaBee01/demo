@@ -15,8 +15,8 @@ const CardComponent = (props) => {
             style={{ width: 200 }}
             bodyStyle={{ padding: '10px' }}
             cover={<img alt="example" src={image} />}
-            onClick={() => countInStock !== 0 && navigate(`/product-detail/${id}`)}
-            disabled={countInStock === 0}
+            onClick={() => navigate(`/product-detail/${id}`)}
+
         >
 
             <StyleProductName>{name}</StyleProductName>

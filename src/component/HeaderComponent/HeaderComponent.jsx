@@ -85,7 +85,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
                         <ButtonInput
                             size="large"
                             // bordered={false}
-                            textButton="Tìm kiếm"
+                            textbutton="Tìm kiếm"
                             placeholder="Tìm kiếm sản phẩm"
                             onChange={onSearch}
                         />

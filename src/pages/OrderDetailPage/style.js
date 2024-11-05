@@ -24,8 +24,9 @@ export const WrapperInfoUser = styled.div`
 
 export const WrapperLabel = styled.div`
     font-weight: bold;
-    color: #666;
+    color: #000;
     margin-bottom: 10px;
+    font-size: 18px;
 `;
 
 export const WrapperContentInfo = styled.div`
@@ -44,6 +45,14 @@ export const WrapperContentInfo = styled.div`
         color: #ff8000;
         font-weight: bold;
     }
+        
+    .delivery-fee{
+        font-size: 14px;
+        
+    }
+    .status-payment{
+        font-size: 14px;
+    }    
 `;
 
 export const WrapperStyleContent = styled.div`
@@ -54,12 +63,12 @@ export const WrapperStyleContent = styled.div`
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 `;
 
-
 export const WrapperProduct = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr 1fr;
     align-items: center;
-    margin-top: 10px;
-    padding: 10px;
+    gap: 10px;
+    padding: 10px 0;
     border-bottom: 1px solid #ddd;
 `;
 
@@ -71,17 +80,17 @@ export const WrapperNameProduct = styled.div`
 
 
 export const WrapperItem = styled.div`
-    width: 200px;
+    text-align: center;
     font-weight: bold;
+    font-size: 14px;
     &:last-child {
         color: red;
     }
-`
+`;
 export const WrapperItemBabel = styled.div`
-    width: 200px;
-    &:last-child {
-        font-weight: bold;
-    }
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
 `;
 
 export const WrapperPrice = styled.div`
@@ -89,3 +98,5 @@ export const WrapperPrice = styled.div`
     flex-direction: column;
     align-items: flex-end;
 `
+
+

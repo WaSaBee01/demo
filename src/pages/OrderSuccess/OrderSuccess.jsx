@@ -11,7 +11,6 @@ const OrderSuccess = () => {
     const order = useSelector((state) => state.order)
     const location = useLocation()
     const { state } = location
-    console.log('location', location)
     return (
         <div style={{ background: '#fff', width: '100%', height: '100vh' }}>
             <Loading isLoading={false}>
@@ -38,29 +37,40 @@ const OrderSuccess = () => {
                             <WrapperItemOrderInfo>
                                 {state.orders?.map((order) => {
                                     return (
-                                        <WrapperItemOrder>
-                                            <div style={{ width: '500px', display: 'flex', alignItems: 'center', gap: 4 }}>
-                                                <img src={order?.image} style={{ width: '77px', height: '79px', objectFit: 'cover' }} alt='img' />
+                                        <WrapperItemOrder key={order?.name}>
+                                            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                                                <img
+                                                    src={order?.image}
+                                                    alt='img'
+                                                    style={{
+                                                        width: '77px',
+                                                        height: '79px',
+                                                        objectFit: 'cover',
+                                                        marginRight: '10px'
+                                                    }}
+                                                />
                                                 <div style={{
                                                     width: '260px',
                                                     overflow: 'hidden',
                                                     whiteSpace: 'nowrap',
-                                                    textOverflow: 'ellipsis'
-                                                }}>{order?.name}</div>
+                                                    textOverflow: 'ellipsis',
+                                                    fontSize: '14px'
+                                                }}>
+                                                    {order?.name}
+                                                </div>
                                             </div>
-                                            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                                <span>
-                                                    <span style={{ fontSize: '13px', color: '#242424' }}>Giá tiền: {convertPrice(order?.price)}</span>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                                                <span style={{ fontSize: '13px', color: '#242424' }}>
+                                                    Giá tiền: {convertPrice(order?.price)}
                                                 </span>
-                                                <span>
-                                                    <span style={{ fontSize: '13px', color: '#242424' }}>Số lượng: {convertPrice(order?.amount)}</span>
+                                                <span style={{ fontSize: '13px', color: '#242424' }}>
+                                                    Số lượng: {order?.amount}
                                                 </span>
-
                                             </div>
                                         </WrapperItemOrder>
                                     )
-                                })}
 
+                                })}
                             </WrapperItemOrderInfo>
                             <div>
                                 <span style={{ fontSize: '16px', color: 'rgb(254, 56, 52)' }}>Tổng tiền: {convertPrice(state?.totalPriceMemo)}</span>

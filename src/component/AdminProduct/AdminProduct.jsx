@@ -306,7 +306,6 @@ const AdminProduct = () => {
                 },
             ],
             onFilter: (value, record) => {
-                console.log('value', { value, record })
                 if (value === '>=') {
                     return record.rating >= 3
                 } else {
@@ -485,7 +484,6 @@ const AdminProduct = () => {
 
     }
 
-    console.log('stateProduct', stateProduct)
 
     return (
         <div>

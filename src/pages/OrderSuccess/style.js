@@ -63,11 +63,11 @@ export const WrapperItemOrderInfo = styled.div`
     padding: 17px 20px;
     border-bottom: 1px solid #f5f5f5;
     background: #fff;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    border-radius: 6px;
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    gap: 15px; 
 `;
 
 export const WrapperTotal = styled.div`
@@ -91,8 +91,11 @@ export const WrapperCountOrder = styled.div`
 
 export const WrapperItemOrder = styled.div`
     display: flex;
-    align-items: center;
-    padding: 9px 16px;
+    flex-direction: column;
+    padding: 10px;
     background: #fff;
-    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    gap: 8px;
+    align-items: flex-start; /* Align content to the left */
 `;

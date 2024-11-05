@@ -38,7 +38,8 @@ const SignInPage = () => {
       } else {
         navigate('/')
       }
-      localStorage.setItem('access_token', JSON.stringify(data?.access_token)) // save token to local storage
+      localStorage.setItem('access_token', JSON.stringify(data?.access_token))
+      localStorage.setItem('refresh_token', JSON.stringify(data?.access_token))
       if (data?.access_token) {
         const decoded = jwtDecode(data?.access_token)
         if (decoded?.id) {
@@ -49,11 +50,12 @@ const SignInPage = () => {
   }, [isSuccess])
 
   const handleGetDetailUser = async (id, token) => {
+    const storage = localStorage.getItem('refresh_token')
+    const refreshToken = JSON.parse(storage)
     const res = await UserService.getDetailUser(id, token)
-    dispatch(updateUser({ ...res?.data, access_token: token }))
+    dispatch(updateUser({ ...res?.data, access_token: token, refreshToken }))
   }
 
-  console.log('mutation', mutation)
 
 
   const handleNavigateSignup = () => {
@@ -71,7 +73,6 @@ const SignInPage = () => {
 
   const handleSignin = () => {
     mutation.mutate({ email, password })
-    console.log('sign in', email, password)
   }
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.53)', height: '100vh' }}>
@@ -122,7 +123,7 @@ const SignInPage = () => {
                 borderRadius: '4px',
                 margin: '26px 0 10px',
               }}
-              textButton={'Đăng nhập'}
+              textbutton={'Đăng nhập'}
               styleTextButton={{ color: '#fff', fontSize: '16px', fontWeight: 500 }}
             ></ButtonComponent>
           </Loading>

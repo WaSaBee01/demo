@@ -23,21 +23,20 @@ const NavbarComponent = () => {
                 )
             case 'star':
                 return options.map((option) => {
-                    console.log('check', option)
                     return (
-                        <div style={{display: 'flex' }}>
+                        <div style={{ display: 'flex' }}>
                             <Rate style={{ fontSize: '12px' }} disabled defaultValue={option} />
                             <span>{`tu ${option}`}</span>
                         </div>
                     )
                 })
-                case 'price':
-                    return options.map((option) => {
-                        
-                        return (
-                            <WrapperTextPrice>{option}</WrapperTextPrice>
-                        )
-                    })
+            case 'price':
+                return options.map((option) => {
+
+                    return (
+                        <WrapperTextPrice>{option}</WrapperTextPrice>
+                    )
+                })
 
             default:
                 return <h1>Default</h1>

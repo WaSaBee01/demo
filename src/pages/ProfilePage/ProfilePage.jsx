@@ -29,7 +29,7 @@ const ProfilePage = () => {
 
     const dispatch = useDispatch()
 
-    const { data,isLoading , isSuccess, isError } = mutation
+    const { data, isLoading, isSuccess, isError } = mutation
 
     const handleGetDetailUser = async (id, token) => {
         const res = await UserService.getDetailUser(id, token)
@@ -105,7 +105,7 @@ const ProfilePage = () => {
                                 borderRadius: '4px',
                                 padding: '0 10px'
                             }}
-                            textButton={'Cập nhật'}
+                            textbutton={'Cập nhật'}
                             styleTextButton={{ color: '#E30019', fontSize: '16px', fontWeight: 500 }}
                         ></ButtonComponent>
                     </WrapperInput>
@@ -126,7 +126,7 @@ const ProfilePage = () => {
                                 borderRadius: '4px',
                                 padding: '0 10px'
                             }}
-                            textButton={'Cập nhật'}
+                            textbutton={'Cập nhật'}
                             styleTextButton={{ color: '#E30019', fontSize: '16px', fontWeight: 500 }}
                         ></ButtonComponent>
                     </WrapperInput>
@@ -147,7 +147,7 @@ const ProfilePage = () => {
                                 borderRadius: '4px',
                                 padding: '0 10px'
                             }}
-                            textButton={'Cập nhật'}
+                            textbutton={'Cập nhật'}
                             styleTextButton={{ color: '#E30019', fontSize: '16px', fontWeight: 500 }}
                         ></ButtonComponent>
                     </WrapperInput>
@@ -168,7 +168,7 @@ const ProfilePage = () => {
                                 borderRadius: '4px',
                                 padding: '0 10px'
                             }}
-                            textButton={'Cập nhật'}
+                            textbutton={'Cập nhật'}
                             styleTextButton={{ color: '#E30019', fontSize: '16px', fontWeight: 500 }}
                         ></ButtonComponent>
                     </WrapperInput>
@@ -183,9 +183,9 @@ const ProfilePage = () => {
                                 width: '60px',
                                 borderRadius: '50%',
                                 objectFit: 'cover'
-                            }} alt="avatar"/>
+                            }} alt="avatar" />
                         )}
-                
+
                         <ButtonComponent
                             onClick={handleUpdate}
                             size={20}
@@ -196,7 +196,7 @@ const ProfilePage = () => {
                                 borderRadius: '4px',
                                 padding: '0 10px'
                             }}
-                            textButton={'Cập nhật'}
+                            textbutton={'Cập nhật'}
                             styleTextButton={{ color: '#E30019', fontSize: '16px', fontWeight: 500 }}
                         ></ButtonComponent>
                     </WrapperInput>

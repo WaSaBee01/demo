@@ -64,7 +64,7 @@ const MyOrder = () => {
 
   const renderProduct = (data) => {
     return data?.map((order) => {
-      return <WrapperHeaderItem>
+      return <WrapperHeaderItem key={order?.id}>
         <img src={order?.image}
           style={{
             width: '70px',
@@ -122,7 +122,7 @@ const MyOrder = () => {
                           border: '1px solid #dc3545',
                           borderRadius: '4px',
                         }}
-                        textButton={'Hủy đơn hàng'}
+                        textbutton={'Hủy đơn hàng'}
                         styleTextButton={{ color: '#000', fontSize: '14px' }}
                       >
                       </ButtonComponent>
@@ -134,7 +134,7 @@ const MyOrder = () => {
                           border: '1px solid #dc3545',
                           borderRadius: '4px',
                         }}
-                        textButton={'Chi tiết đơn hàng'}
+                        textbutton={'Chi tiết đơn hàng'}
                         styleTextButton={{ color: '#000', fontSize: '14px' }}
                       >
                       </ButtonComponent>
