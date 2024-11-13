@@ -32,22 +32,22 @@ const SignInPage = () => {
   const { data, isLoading, isSuccess } = mutation
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && data?.status === 'OK') {
       if (location?.state) {
-        navigate(location?.state)
+        navigate(location?.state);
       } else {
-        navigate('/')
+        navigate('/');
       }
-      localStorage.setItem('access_token', JSON.stringify(data?.access_token))
-      localStorage.setItem('refresh_token', JSON.stringify(data?.access_token))
+      localStorage.setItem('access_token', JSON.stringify(data?.access_token));
+      localStorage.setItem('refresh_token', JSON.stringify(data?.access_token));
       if (data?.access_token) {
-        const decoded = jwtDecode(data?.access_token)
+        const decoded = jwtDecode(data?.access_token);
         if (decoded?.id) {
-          handleGetDetailUser(decoded?.id, data?.access_token)
+          handleGetDetailUser(decoded?.id, data?.access_token);
         }
       }
     }
-  }, [isSuccess])
+  }, [isSuccess, data]);
 
   const handleGetDetailUser = async (id, token) => {
     const storage = localStorage.getItem('refresh_token')
@@ -78,7 +78,7 @@ const SignInPage = () => {
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.53)', height: '100vh' }}>
       <div style={{ width: '800px, height: 445px', borderRadius: '6px', background: '#fff', display: 'flex' }}>
         <WrapperContainerLeft>
-          <h1>Xin chao</h1>
+          <h1>Xin chào</h1>
           <p>Đăng nhập hoặc Tạo tài khoản</p>
           <InputForm style={{ marginBottom: '10px' }}
             placeholder="abc@gmail.com"
@@ -94,13 +94,6 @@ const SignInPage = () => {
                 right: '8px'
               }}
             >
-              {/* {
-                isShowPassword ? (
-                  < EyeFilled />
-                ) : (
-                  <EyeInvisibleFilled />
-                )
-              } */}
             </span>
             <InputForm placeholder="password"
               type={isShowPassword ? "text" : "password"}
@@ -136,8 +129,8 @@ const SignInPage = () => {
 
         <WrapperContainerRight>
           <Image src={logo} preview={false} alt="image-logo" height="203px" width="203px" />
-          <h4>Mua sắm tại TechShop</h4>
-          <span>muamuamuamuamua</span>
+          <h4>Mua sắm tại EStore</h4>
+          <span>Siêu ưu đãi mỗi ngày</span>
         </WrapperContainerRight>
       </div>
     </div>

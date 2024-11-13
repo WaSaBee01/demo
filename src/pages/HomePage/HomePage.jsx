@@ -15,17 +15,18 @@ import { useDebounce } from '../../hooks/useDebounce'
 const HomePage = () => {
   const searchProduct = useSelector((state) => state?.product?.search)
   const [loading, setLoading] = useState(false)
-  const [limit, setLimit] = useState(5)
+  const [limit, setLimit] = useState(6)
   const searchDebounce = useDebounce(searchProduct, 500)
   const [typeProducts, setTypeProducts] = useState([])
 
   const fetchAllProducts = async (context) => {
-    const limit = context?.queryKey && context?.queryKey[1]
-    const search = context?.queryKey && context?.queryKey[2]
-    const res = await ProductService.getAllProducts(search, limit)
+    const limit = context?.queryKey && context?.queryKey[1];
+    const search = context?.queryKey && context?.queryKey[2]?.toLowerCase();
+    const res = await ProductService.getAllProducts(search, limit);
 
-    return res
-  }
+    return res;
+  };
+
 
   const fetchAllTypeProducts = async () => {
     const res = await ProductService.getAllTypeProduct()
@@ -55,38 +56,43 @@ const HomePage = () => {
 
 
       </div>
-      <div className='body' style={{ width: '100%', backgroundColor: '#f8f8fc' }}>
-        <div id="container" style={{ height: '1500px', width: '1270px', margin: '0 auto' }}>
+      <div className="body" style={{ width: '100%', backgroundColor: '#f8f8fc' }}>
+        <div id="container" style={{ maxWidth: '1270px', margin: '0 auto' }}>
           <SliderComponent arrImages={[slider1, slider2, slider3]} />
           <WrapperProducts>
-            {products?.data?.map((product) => {
-              return (
-                <CardComponent
-                  key={product._id}
-                  countInStock={product.countInStock}
-                  description={product.description}
-                  image={product.image}
-                  name={product.name}
-                  price={product.price}
-                  rating={product.rating}
-                  type={product.type}
-                  selled={product.selled}
-                  discount={product.discount}
-                  id={product._id}
-                />
-              )
-            })}
-
+            {products?.data?.map((product) => (
+              <CardComponent
+                key={product._id}
+                countInStock={product.countInStock}
+                description={product.description}
+                image={product.image}
+                name={product.name}
+                price={product.price}
+                rating={product.rating}
+                type={product.type}
+                selled={product.selled}
+                discount={product.discount}
+                id={product._id}
+              />
+            ))}
           </WrapperProducts>
           <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
             <WrapperButton
-              textbutton={isPreviousData ? 'Load more' : "Xem Thêm"} type="outline" styleButton={{
-                border: '1px solid red', color: ` ${products?.total === products?.data?.length ? '#ccc' : '#dc3545'}`, marginTop: '20px',
-                width: '240px', height: '38px', borderRadius: '4px'
+              textbutton={isPreviousData ? 'Load more' : 'Xem Thêm'}
+              type="outline"
+              styleButton={{
+                border: '1px solid red',
+                color: `${products?.total === products?.data?.length ? '#ccc' : '#dc3545'}`,
+                marginTop: '20px',
+                marginBottom: '20px',
+                width: '240px',
+                height: '38px',
+                borderRadius: '4px',
               }}
               disabled={products?.total === products?.data?.length || products?.totalPage === 1}
               styleTextButton={{ fontWeight: 500, color: products?.total === products?.data?.length && '#fff' }}
-              onClick={() => setLimit((prev) => prev + 6)} />
+              onClick={() => setLimit((prev) => prev + 12)}
+            />
           </div>
         </div>
       </div>

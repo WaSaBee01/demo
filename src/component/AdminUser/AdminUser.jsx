@@ -260,9 +260,9 @@ const AdminUser = () => {
     },
   ];
   const dataTable = users?.data?.length && users?.data?.map((user) => {
-    return { ...user, key: user._id, isAdmin: user.isAdmin ? 'TRUE' : 'FALSE' }
+    return { ...user, key: user._id }
   })
-
+  //, isAdmin: user.isAdmin ? 'TRUE' : 'FALSE'
 
   useEffect(() => {
     if (isSuccessUpdated && dataUpdated?.status === 'OK') {

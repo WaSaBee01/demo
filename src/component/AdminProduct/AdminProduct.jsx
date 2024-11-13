@@ -181,12 +181,9 @@ const AdminProduct = () => {
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
-        // setSearchText(selectedKeys[0]);
-        // setSearchedColumn(dataIndex);
     };
     const handleReset = (clearFilters) => {
         clearFilters();
-        // setSearchText('');
     };
     const getColumnSearchProps = (dataIndex) => ({
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -407,13 +404,26 @@ const AdminProduct = () => {
             type: stateProduct.type === 'addType' ? stateProduct.newType : stateProduct.type,
             countInStock: stateProduct.countInStock,
             discount: stateProduct.discount
-        }
+        };
+
         mutation.mutate(params, {
             onSettled: () => {
-                queryProduct.refetch()
+                queryProduct.refetch();
+            },
+            onSuccess: (data) => {
+                if (data?.status === 'ERR' && data?.message === 'The name of the product already exists') {
+                    message.error('Product with this name already exists.');
+                } else if (data?.status === 'OK') {
+                    message.success('Product created successfully.');
+                    handleCancel();
+                }
+            },
+            onError: () => {
+                message.error('An error occurred while creating the product.');
             }
-        })
-    }
+        });
+    };
+
 
     const handleOnchange = (e) => {
         setStateProduct({
