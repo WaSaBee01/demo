@@ -10,10 +10,10 @@ import { useMutationHook } from '../../hooks/useMutationHook'
 import * as UserService from '../../services/UserService'
 import Loading from '../../component/LoadingComponent/Loading'
 import * as message from '../../component/Message/Message'
-import { updateUser } from '../../redux/slides/userSlide'
+import { updateUser } from '../../redux/slides/userSlice'
 import * as OrderService from '../../services/OrderService'
 import { useNavigate } from 'react-router-dom'
-import { removeAllFromCart } from '../../redux/slides/orderSlide'
+import { removeAllFromCart } from '../../redux/slides/orderSlice'
 import { PayPalButton } from "react-paypal-button-v2";
 import * as PaymentService from '../../services/PaymentService'
 const PaymentPage = () => {

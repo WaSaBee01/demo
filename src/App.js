@@ -1,14 +1,15 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { routes } from './routes';
-import DefaultComponent from './component/DefaultComponent/DefaultComponent';
-import { isJsonString } from './utils';
-import * as UserService from './services/UserService';
-import { jwtDecode } from 'jwt-decode';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateUser } from './redux/slides/userSlide';
-import Loading from './component/LoadingComponent/Loading';
-import FooterComponent from './component/FooterComponent/FooterComponent';
+import React, { Fragment, useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { routes } from "./routes";
+import DefaultComponent from "./component/DefaultComponent/DefaultComponent";
+import { isJsonString } from "./utils";
+import * as UserService from "./services/UserService";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "./redux/slides/userSlice";
+import Loading from "./component/LoadingComponent/Loading";
+import FooterComponent from "./component/FooterComponent/FooterComponent";
+import ChatBox from "./component/ChatboxAI/Chatbox";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function App() {
   }, []);
 
   const handleDecoded = () => {
-    let storageData = localStorage.getItem('access_token');
+    let storageData = localStorage.getItem("access_token");
     let decoded = {};
     if (storageData && isJsonString(storageData)) {
       storageData = JSON.parse(storageData);
@@ -40,7 +41,7 @@ function App() {
       const { decoded } = handleDecoded();
       if (decoded?.exp < currentTime.getTime() / 1000) {
         const data = await UserService.refreshToken();
-        config.headers['token'] = `Bearer ${data?.access_token}`;
+        config.headers["token"] = `Bearer ${data?.access_token}`;
       }
       return config;
     },
@@ -56,6 +57,7 @@ function App() {
 
   return (
     <FooterComponent>
+      <ChatBox />
       <Loading isLoading={isloading}>
         <Router>
           <Routes>

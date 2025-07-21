@@ -11,7 +11,7 @@ import { useMutationHook } from '../../hooks/useMutationHook'
 import Loading from '../../component/LoadingComponent/Loading'
 import { jwtDecode } from "jwt-decode";
 import { useDispatch } from 'react-redux'
-import { updateUser } from '../../redux/slides/userSlide'
+import { updateUser } from '../../redux/slides/userSlice'
 
 const SignInPage = () => {
 
@@ -63,6 +63,10 @@ const SignInPage = () => {
   }
 
 
+  const handleNavigateForgotPassword = () => {
+    navigate('/forgot-password')
+  }
+
   const handleOnChangeEmail = (value) => {
     setEmail(value)
   }
@@ -78,8 +82,8 @@ const SignInPage = () => {
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.53)', height: '100vh' }}>
       <div style={{ width: '800px, height: 445px', borderRadius: '6px', background: '#fff', display: 'flex' }}>
         <WrapperContainerLeft>
-          <h1>Xin chào</h1>
-          <p>Đăng nhập hoặc Tạo tài khoản</p>
+          <h1 style={{ fontSize: '20px' }}>Xin chào</h1>
+          <p style={{ fontSize: '15px' }}>Đăng nhập hoặc Tạo tài khoản</p>
           <InputForm style={{ marginBottom: '10px' }}
             placeholder="abc@gmail.com"
             value={email}
@@ -122,7 +126,6 @@ const SignInPage = () => {
           </Loading>
 
 
-          <p><WrapperTextLight>Quên mật khẩu?</WrapperTextLight></p>
           <p>Chưa có tài khoản? <WrapperTextLight onClick={handleNavigateSignup}>Tạo tài khoản</WrapperTextLight></p>
 
         </WrapperContainerLeft>

@@ -12,7 +12,7 @@ const initialState = {
   city: ''
 }
 
-export const userSlide = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
@@ -43,6 +43,6 @@ export const userSlide = createSlice({
   },
 })
 
-export const { updateUser, resetUser } = userSlide.actions
+export const { updateUser, resetUser } = userSlice.actions
 
-export default userSlide.reducer
+export default userSlice.reducer

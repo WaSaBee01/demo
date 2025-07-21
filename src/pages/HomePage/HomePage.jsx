@@ -91,7 +91,7 @@ const HomePage = () => {
               }}
               disabled={products?.total === products?.data?.length || products?.totalPage === 1}
               styleTextButton={{ fontWeight: 500, color: products?.total === products?.data?.length && '#fff' }}
-              onClick={() => setLimit((prev) => prev + 12)}
+              onClick={() => setLimit((prev) => prev + 6)}
             />
           </div>
         </div>

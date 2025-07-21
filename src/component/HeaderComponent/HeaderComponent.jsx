@@ -10,8 +10,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as UserService from '../../services/UserService'
-import { resetUser } from '../../redux/slides/userSlide'
-import { searchProduct } from '../../redux/slides/productSlide';
+import { resetUser } from '../../redux/slides/userSlice'
+import { searchProduct } from '../../redux/slides/productSlice';
 
 const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
     const navigate = useNavigate()
@@ -77,7 +77,7 @@ const HeaderComponent = ({ isHiddenSearch = false, isHiddenCart = false }) => {
         <div >
             <WraperHeader style={{ justifyContent: isHiddenSearch && isHiddenCart ? 'space-between' : 'unset' }}>
                 <Col span={6}>
-                    <WraperTextHeader onClick={() => navigate('/')} style={{ cursor: 'pointer' }}> TechShop </WraperTextHeader>
+                    <WraperTextHeader onClick={() => navigate('/')} style={{ cursor: 'pointer' }}> EStore </WraperTextHeader>
                 </Col>
 
                 {!isHiddenSearch && (

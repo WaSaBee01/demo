@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { WrapperCountOrder, WrapperInfo, WrapperInputNumber, WrapperItemOrder, WrapperLeft, WrapperListOrder, WrapperPriceDiscount, WrapperRight, WrapperStyleDelivery, WrapperStyleHeader, WrapperTotal } from './style'
 import { useDispatch, useSelector } from 'react-redux'
 import ButtonComponent from '../../component/ButtonComponent/ButtonComponent'
-import { decreaseAmount, increaseAmount, removeAllFromCart, removeFromCart, selectedOrder } from '../../redux/slides/orderSlide'
+import { decreaseAmount, increaseAmount, removeAllFromCart, removeFromCart, selectedOrder } from '../../redux/slides/orderSlice'
 import { convertPrice } from '../../utils'
 import ModalComponent from '../../component/ModalComponent/ModalComponent'
 import Inputcomponent from '../../component/InputComponent/Inputcomponent'
@@ -12,7 +12,7 @@ import { useMutationHook } from '../../hooks/useMutationHook'
 import * as UserService from '../../services/UserService'
 import Loading from '../../component/LoadingComponent/Loading'
 import * as message from '../../component/Message/Message'
-import { updateUser } from '../../redux/slides/userSlide'
+import { updateUser } from '../../redux/slides/userSlice'
 import { useNavigate } from 'react-router-dom'
 import StepComponent from '../../component/StepComponent/StepComponent'
 
@@ -126,8 +126,8 @@ const OrderPage = () => {
   }, [priceMemo, priceDiscountMemo, deliveryMemo])
 
   const handleRemoveAll = () => {
-    if (listChecked?.length > 1) {
-      dispatch(removeAllFromCart(listChecked))
+    if (listChecked?.length >= 1) {
+      dispatch(removeAllFromCart({ listChecked }))
     }
   }
 
@@ -242,7 +242,7 @@ const OrderPage = () => {
                     <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                       <span>
                         <span style={{ fontSize: '13px', color: '#242424' }}>{convertPrice(order?.price)}</span>
-                        <WrapperPriceDiscount>0d</WrapperPriceDiscount>
+                        <WrapperPriceDiscount> - {order?.discount} %</WrapperPriceDiscount>
                       </span>
                       <WrapperCountOrder>
                         <button style={{ border: 'none', background: 'transparent', cursor: 'pointer' }} onClick={() => handleChangeCount('decrease', order?.product, order?.amount === 1)}>

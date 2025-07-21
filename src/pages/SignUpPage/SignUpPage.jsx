@@ -69,8 +69,8 @@ const SignUpPage = () => {
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.53)', height: '100vh' }}>
       <div style={{ width: '800px, height: 445px', borderRadius: '6px', background: '#fff', display: 'flex' }}>
         <WrapperContainerLeft>
-          <h1>Xin chao</h1>
-          <p>Đăng nhập hoặc Tạo tài khoản</p>
+          <h1 style={{ fontSize: '20px' }}>Xin chào</h1>
+          <p style={{ fontSize: '15px' }}>Đăng nhập hoặc Tạo tài khoản</p>
 
           <InputForm
             style={{ marginBottom: '10px' }}

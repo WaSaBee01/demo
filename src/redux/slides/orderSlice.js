@@ -19,7 +19,7 @@ const initialState = {
     isSuccessOrder: false
 }
 
-export const orderSlide = createSlice({
+export const orderSlice = createSlice({
     name: 'order',
     initialState,
     reducers: {
@@ -89,7 +89,6 @@ export const orderSlide = createSlice({
     },
 })
 
-// Action creators are generated for each case reducer function
-export const { addToCart, removeFromCart, increaseAmount, decreaseAmount, removeAllFromCart, selectedOrder, resetOrder } = orderSlide.actions
+export const { addToCart, removeFromCart, increaseAmount, decreaseAmount, removeAllFromCart, selectedOrder, resetOrder } = orderSlice.actions
 
-export default orderSlide.reducer
+export default orderSlice.reducer
