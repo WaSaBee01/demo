@@ -273,14 +273,20 @@ const AdminUser = () => {
     }
   }, [isSuccessUpdated])
 
+  /////////////////////////////////////////////////////
   useEffect(() => {
-    if (isSuccessDeleted && dataDeleted?.status === 'OK') {
-      message.success()
-      handleCancelDelete()
-    } else if (isErrorDeleted) {
-      message.error()
+  if (isSuccessDeleted && dataDeleted) {
+    if (dataDeleted.status === 'OK') {
+      message.success(dataDeleted.message );
+      handleCancelDelete();
+    } else if (dataDeleted.status === 'ERR') {
+      message.error(dataDeleted.message );
+      handleCancelDelete();
     }
-  }, [isSuccessDeleted])
+  } else if (isErrorDeleted) {
+    message.error("Có lỗi xảy ra!");
+  }
+}, [isSuccessDeleted, dataDeleted, isErrorDeleted]);
 
   useEffect(() => {
     if (isSuccessDeletedMany && dataDeletedMany?.status === 'OK') {
