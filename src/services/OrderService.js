@@ -1,6 +1,12 @@
 import { axiosJWT } from "./UserService"
 
 
+import axios from 'axios';
+
+export const getOrderById = async (id) => {
+  const res = await axios.get(`${process.env.REACT_APP_API_URL}/order/get-order-details/${id}`);
+  return res.data;
+};
 
 export const createOrder = async (data, access_token) => {
     const res = await axiosJWT.post(`${process.env.REACT_APP_API_URL}/order/create`, data, {

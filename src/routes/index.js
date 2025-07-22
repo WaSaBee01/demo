@@ -1,4 +1,3 @@
-
 import AdminPage from '../pages/AdminPage/AdminPage'
 import HomePage from '../pages/HomePage/HomePage'
 import MyOrder from '../pages/MyOrder/MyOrder'
@@ -47,7 +46,6 @@ export const routes = [
         page: PaymentPage,
         isShowHeader: true
     },
-
     {
         path: '/orderSuccess',
         page: OrderSuccess,
@@ -96,6 +94,8 @@ export const routes = [
         isShowHeader: false,
         isPrivate: true
     },
+
+  
 
     {
         path: '*',
